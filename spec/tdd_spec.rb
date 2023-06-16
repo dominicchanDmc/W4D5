@@ -8,7 +8,8 @@ describe Array do
     let(:empty_arr) { [] }
     let(:arr_2) { [1,2,3,-1] }
     let(:arr_3) { [2,-2,3,-3,1] }
-    # let(:arr_4) { [3,-3,2,-2,1] }
+    let(:arr_4) { [[0, 1, 2],[3, 4, 5],[6, 7, 8]] }
+    let(:arr_5) { [1] }
     
     describe "#my_uniq" do  
       it "should return empty array if input a empty array" do 
@@ -53,8 +54,60 @@ describe Array do
       end
     end
 
+    describe "#my_transpose" do  
+     it 'should return an empty array when array is empty' do 
+        expect(empty_arr.my_transpose).to eq([])
+     end
 
+     it 'should return self if array only have 1 element' do     
+        expect(arr_5.my_transpose).to eq([1])
+     end
+
+     it "should not modify the original array" do
+        arr_dup = arr_4.dup
+        arr_4.my_transpose 
+       expect(arr_4).to eq(arr_dup)
+     end
+
+     it 'it needs to correctly transpose from rows to columns'do 
+     expect(arr_4.my_transpose).to eq([[0, 3, 6], [1, 4, 7],[2, 5, 8]])
+     end
+
+    end
 end
+
+describe "#stockPicker" do  
+let(:empty_arr) { [] }
+let(:one_arr) { [1] }
+let(:arr_1) { [1,2,2,4,1] }
+let(:arr_2) { [100, 180, 260, 310, 40, 535, 695] }
+
+    it 'should return an empty array when array is empty' do 
+        expect{stockPicker(empty_arr)}.to raise_error('At lease input 2 prices')
+    end
+
+    it 'should return self if array only have 2 element' do     
+        expect{stockPicker(one_arr)}.to raise_error('At lease input 2 prices')
+    end
+
+    it 'anarr[1] must gerater than anarr[0]' do 
+        result = stockPicker(arr_1)
+        expect(result[1]).to be > result[0]
+    end
+
+    it 'reault must be most profitable' do 
+        expect(stockPicker(arr_1)).to eq([0,3])
+        expect(stockPicker(arr_2)).to eq([4,6])     
+    end
+end
+
+        #[1,2,2,4,1]
+        # empty?    raise error
+        # if arr.length < 2  raise error
+        # anarr[1] must gerater than anarr[0]
+        # reault must be most profitable   
+
+
 
         # empty?                           checked
         # check return is array?           checked
@@ -67,3 +120,15 @@ end
         #should not modify the original array
         #needs to have the correct order
         
+
+        # empty?    return empty
+        # not 2-D array? return [1,2,3]  return [[1],[2],[3]]
+        #should not modify the original array
+
+        # needs to have the correct answer
+
+
+
+
+
+
